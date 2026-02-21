@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: crypto_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cryptodb
+    ports:
+      - "5432:5432"
+    # Postgres'in gerçekten bağlantı kabul edip etmediğini kontrol eder
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d cryptodb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  etl_app:
+    build: .
+    container_name: crypto_etl_app
+    depends_on:
+      db:
+        condition: service_healthy # db container'ı sağlıklı olana kadar bekle
+    environment:
+      # Docker network içinde db servisinin ismi host olarak kullanılır
+      DB_HOST: db 
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_NAME: cryptodb
+
+  # Veritabanındaki tabloları tarayıcıdan görmek için arayüz servisi
+  db_viewer:
+    image: adminer
+    container_name: crypto_db_viewer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db

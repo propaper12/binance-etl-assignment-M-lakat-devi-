@@ -1,0 +1,5 @@
+requests==2.31.0
+pandas==2.2.0
+SQLAlchemy==2.0.25
+psycopg2-binary==2.9.9
+tenacity==8.2.3
