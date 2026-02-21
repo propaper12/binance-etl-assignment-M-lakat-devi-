@@ -1,6 +1,6 @@
 # Crypto ETL Pipeline 🚀
 
-Bu proje, Binance API kullanarak bir kripto para biriminin (BTC/USDT) saatlik fiyat verilerini çeken, dönüştüren ve PostgreSQL veritabanına yükleyen **Dockerize edilmiş bir ETL (Extract, Transform, Load)** boru hattıdır.
+Bu proje, Binance API kullanarak bir kripto para biriminin (BTC/USDT) saatlik fiyat verilerini çeken, dönüştüren ve PostgreSQL veritabanına yükleyen **Dockerize edilmiş bir ETL (Extract, Transform, Load)** data pipelinedir.Bu sistemde tamamen batcg datayı işliyoruz yani bınance uzerınden verıyı stream data gıbı bır kere cekıyoruz ama ondan sonra batcg data gıbı ıslıyoruz artık.
 
 Bir mülakat görevi olarak tasarlanmış olup, endüstri standartları (Best Practices) gözetilerek geliştirilmiştir.
 
@@ -17,4 +17,5 @@ Projeyi bilgisayarınızda çalıştırmak için Docker ve Docker Compose'un kur
 1. Repoyu klonlayın ve proje dizinine gidin.
 2. Aşağıdaki komut ile tüm sistemi ayağa kaldırın:
    ```bash
+
    docker-compose up --build -d
